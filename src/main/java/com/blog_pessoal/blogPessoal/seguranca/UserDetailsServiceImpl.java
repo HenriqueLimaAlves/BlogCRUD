@@ -12,9 +12,8 @@ import com.blog_pessoal.blogPessoal.model.Usuario;
 import com.blog_pessoal.blogPessoal.repository.UsuarioRepository;
 
 
-
 @Service
-public class UserDatailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UsuarioRepository userRepository;
