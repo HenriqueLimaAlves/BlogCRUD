@@ -1,4 +1,4 @@
-package com.blog_pessoal.blogPessoal.model;
+package generation.org.blogPessoal.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,23 +9,25 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="tb_usuario")
+@Table(name = "usuarios")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@NotNull
+	@Size(min = 5, max = 100)
 	private String nome;
 	
 	@NotNull
-	@Size(min=2, max=100)
+	@Size(min = 5, max = 100)
 	private String usuario;
 	
 	@NotNull
-	@Size(min=5, max=100)
+	@Size(min = 5)
 	private String senha;
+	
 
 	public long getId() {
 		return id;
@@ -57,5 +59,6 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	} 
+	}
+	
 }

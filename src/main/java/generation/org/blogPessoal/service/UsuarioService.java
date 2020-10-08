@@ -1,4 +1,4 @@
-package com.blog_pessoal.blogPessoal.service;
+package generation.org.blogPessoal.service;
 
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -8,42 +8,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.blog_pessoal.blogPessoal.model.UserLogin;
-import com.blog_pessoal.blogPessoal.model.Usuario;
-import com.blog_pessoal.blogPessoal.repository.UsuarioRepository;
+import generation.org.blogPessoal.model.Usuario;
+import generation.org.blogPessoal.model.UsuarioLogin;
+import generation.org.blogPessoal.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repository;
-	
+
 	public Usuario CadastrarUsuario(Usuario usuario) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
+
 		String senhaEncoder = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaEncoder);
-		
+
 		return repository.save(usuario);
 	}
-	
-	public Optional<UserLogin> Logar(Optional<UserLogin> user){
+
+	public Optional<UsuarioLogin> Logar(Optional<UsuarioLogin> user) {
+
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario> usuario = repository.findByUsuario(user.get().getUsuario());
-		
-		if(usuario.isPresent()) {
-			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
-				
-				String auth = user.get().getUsuario() + " : " + user.get().getSenha();
+
+		if (usuario.isPresent()) {
+			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
+
+				String auth = user.get().getUsuario() + ":" + user.get().getSenha();
 				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 				String authHeader = "Basic " + new String(encodedAuth);
-				
-				user.get().setToken(authHeader);
+
+				user.get().setToken(authHeader);				
 				user.get().setNome(usuario.get().getNome());
-				
+
 				return user;
+
 			}
-		}	
-		return null; 
+		}
+		return null;
 	}
+
 }

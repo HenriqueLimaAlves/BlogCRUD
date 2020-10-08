@@ -1,4 +1,4 @@
-package com.blog_pessoal.blogPessoal.model;
+package generation.org.blogPessoal.model;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import com.sun.istack.NotNull;
 @Entity
 @Table(name = "tb_tema")
 public class Tema {
-	
-	@Id
+
+	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
@@ -51,4 +51,5 @@ public class Tema {
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
+	
 }

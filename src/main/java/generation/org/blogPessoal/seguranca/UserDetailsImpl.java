@@ -1,4 +1,4 @@
-package com.blog_pessoal.blogPessoal.seguranca;
+package generation.org.blogPessoal.seguranca;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.blog_pessoal.blogPessoal.model.Usuario;
+import generation.org.blogPessoal.model.Usuario;
 
 public class UserDetailsImpl implements UserDetails{
 	private static final long serialVersionUID = 1L;
@@ -58,3 +58,4 @@ public class UserDetailsImpl implements UserDetails{
 		return true;
 	}
 } 
+
